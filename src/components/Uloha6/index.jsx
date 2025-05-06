@@ -1,4 +1,5 @@
-import './ukol.css'
+import { useState } from 'react';
+import './ukol.css';
 
 /*
 Zadání 1: Pomocí `map` vypiš v seznamu `ul` všechny úkoly pomocí komponenty `Ukol`.
@@ -11,16 +12,29 @@ Bonus: Nastav jednotlivým položkám ve výpisu `key`, aby vývojářské nást
 */
 
 const Ukol = ({ nazev }) => {
-  return (
+  const [splneno, setSplneno] = useState(false);
+  return splneno ? (
+    <li className="ukol ukol--splnen">
+      <span className="ukol__nazev">{nazev}</span>
+    </li>
+  ) : (
     <li className="ukol">
       <span className="ukol__nazev">{nazev}</span>
-      <button className="ukol__akce">splnit</button>
+      <button onClick={() => setSplneno(true)} className="ukol__akce">
+        splnit
+      </button>
     </li>
-  )
-}
+  );
+};
 
 export const Uloha6 = () => {
-  const ukoly = ['Zamést', 'Pověsit prádlo', 'Umýt okna', 'Vynést koš']
+  const ukoly = ['Zamést', 'Pověsit prádlo', 'Umýt okna', 'Vynést koš'];
 
-  return <ul>{ukoly}</ul>
-}
+  return (
+    <ul>
+      {ukoly.map((ukol) => {
+        return <Ukol key={ukol} nazev={ukol} />;
+      })}
+    </ul>
+  );
+};

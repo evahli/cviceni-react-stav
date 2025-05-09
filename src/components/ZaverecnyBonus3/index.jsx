@@ -1,4 +1,4 @@
-import { useCasVSekundach } from './hodiny'
+import { useCasVSekundach } from './hodiny';
 
 /*
 Zadání: Pomocí předchystané stavové proměnné, která se mění každou sekundu, zobraz aktuální čas
@@ -9,11 +9,14 @@ Nápověda: Pokud je v `casVSekundach` nula, pak je 0:00:00. Pokud je v `casVSek
 */
 
 export const ZaverecnyBonus3 = () => {
-  const casVSekundach = useCasVSekundach()
+  const casVSekundach = useCasVSekundach();
+  const hodiny = Math.floor(casVSekundach / 3600);
+  const minuty = Math.floor((casVSekundach % 3600) / 60);
+  const vteriny = casVSekundach % 60;
 
   return (
     <>
-      Čas právě teď: <b>{casVSekundach}</b>
+      Čas právě teď: <b>{hodiny} : {minuty} : {vteriny<=9 ? '0' + vteriny :vteriny}</b>
     </>
-  )
-}
+  );
+};
